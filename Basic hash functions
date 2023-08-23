@@ -1,0 +1,81 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+class employee{
+// here we create a data members    
+    public:
+    int id;
+    string name;
+};
+
+// another class is created named hashtable
+class hashtable{
+    // 10 ojects of class named record is being created
+    private:
+    employee record[10];
+     
+    // constructor is created which by default initializes id to -1
+    public:
+    hashtable(){
+      for(int i=0;i<10;i++){
+          record[i].id=-1;
+          record[i].name="";
+      }
+    };
+    // getting hash index
+    int hashValue(int number){
+         return number%10;
+    } 
+     
+    void insertRecord(string name, int id)
+    {
+        int index = hashValue(id);
+         if(record[index].id == -1)
+         {
+            record[index].id = id;
+            record[index].name = name;
+         }
+         else
+         {
+             int newIndex = (index+1)%10;
+        while (newIndex != index && record[newIndex].id != -1)
+        {
+            newIndex = (newIndex + 1) % 10;
+        }
+          if (newIndex != index)
+          {
+            record[newIndex].id = id;
+            record[newIndex].name = name;
+          }
+        
+        }
+    }
+    void display()
+    {
+         for(int i=0;i<10;i++){
+          cout<< i <<"  "<< record[i].id<< ",";
+          cout<< record[i].name<<endl;
+      } 
+    }   
+  };
+
+int main() {
+    
+    hashtable ht;
+    
+
+    ht.insertRecord("b",781);
+    ht.insertRecord("eqw",785);
+    ht.insertRecord("nb",786);
+    ht.insertRecord("nmc",784);
+    ht.insertRecord("afh",738);
+    ht.insertRecord("afv",786);
+    ht.insertRecord("rf",787);
+    ht.insertRecord("vsch",567);
+    ht.insertRecord("cvs",157);
+    ht.insertRecord("afd",463);
+    
+    ht.display();
+    return 0;
+}
