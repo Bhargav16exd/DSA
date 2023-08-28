@@ -78,7 +78,7 @@ class hashtable{
         while(i<10)
         {
          if(searchID == record[i].id){
-         cout<<"Employee Found Named => "<<record[i].name<<"at ID =>"<<record[i].id<<endl;
+         cout<<"Employee Found Named => "<<record[i].name<<"= >at ID =>"<<record[i].id<<endl;
            break;
          }
           else
@@ -101,10 +101,11 @@ int main() {
     hashtable ht;
     int x;
     
-    cout<<"Enter Action to perform"<<endl<<"Enter 1 to Insert Data"<<endl<<"Enter 2 to display data " <<endl<<"Enter 3 to search Particualr employee details"<<endl;
-    cin>>x;
-   
+
     while(1){
+        
+         cout<<"Enter Action to perform"<<endl<<"Enter 1 to Insert Data"<<endl<<"Enter 2 to display data " <<endl<<"Enter 3 to search Particular employee details"<<endl;
+    cin>>x;
         
     switch(x){
         case 1 : ht.insertRecord("b",781); 
@@ -117,7 +118,7 @@ int main() {
                  ht.insertRecord("vsch",567);
                  ht.insertRecord("cvs",157);
                  ht.insertRecord("afd",463);
-                 cout<<"Data inserted Success";
+                 cout<<"Data inserted Success"<<endl;
                  break;
        case 2:   ht.display();  
                  break;
@@ -126,7 +127,7 @@ int main() {
         
         default: cout<<"Enter Valid input";
           }// switch case ends
-
+    
    }// loops ends
     return 0;
 }
