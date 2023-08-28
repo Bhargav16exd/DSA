@@ -10,7 +10,8 @@ class employee{
 };
 
 // another class is created named hashtable
-class hashtable{
+class hashtable
+{
     // 10 ojects of class named record is being created
     private:
     employee record[10];
@@ -22,7 +23,7 @@ class hashtable{
           record[i].id=-1;
           record[i].name="";
       }
-    };
+    }
     // getting hash index
     int hashValue(int number){
          return number%10;
@@ -37,19 +38,18 @@ class hashtable{
             record[index].name = name;
          }
          else
-    { int i=0;
-      int newIndex = (index+i*i)%10;
-      while (newIndex != index && record[newIndex].id != -1)
-        {
-            i++;
-            newIndex = (newIndex + i*i) % 10;
+        {   int i=0;
+            int newIndex = (index+i*i)%10;
+            while(record[newIndex].id != -1 && i<10){
+                if(record[newIndex].id == -1){
+                   record[newIndex].id = id;
+                   record[newIndex].name = name; 
+                }
+                else{
+                    i++;
+                }
+            }
         }
-        if (newIndex != index)
-         {
-            record[newIndex].id = id;
-            record[newIndex].name = name;
-         }
-      }
     }
     void display()
     {
@@ -78,9 +78,9 @@ class hashtable{
         while(i<10)
         {
          if(searchID == record[i].id){
-         cout<<"Employee Found Named => "<<record[i].name<<"= >at ID =>"<<record[i].id<<endl;
+          cout<<"Employee Found Named => "<<record[i].name<<"= >at ID =>"<<record[i].id<<endl;
            break;
-         }
+          }
           else
           {
            i++;
