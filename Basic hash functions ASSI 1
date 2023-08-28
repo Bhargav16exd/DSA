@@ -57,25 +57,76 @@ class hashtable{
           cout<< i <<"  "<< record[i].id<< ",";
           cout<< record[i].name<<endl;
       } 
-    }   
+    } 
+    // Search function
+    void search()
+    {
+     int searchID;
+     cout<<"Enter ID to search"<<endl;
+     cin>>searchID;
+     int searchIdIndex = hashValue(searchID);
+    
+     // Checks if ID given matches the index
+     if( searchID == record[searchIdIndex].id)
+     {
+        cout<<"Employee Found Named => "<<record[searchIdIndex].name<<"at ID =>"<<record[searchIdIndex].id<<endl;
+     }//If condition ends
+     // In Case the id dont match Else gets executed
+     else
+     {
+        int i=0;
+        while(i<10)
+        {
+         if(searchID == record[i].id){
+         cout<<"Employee Found Named => "<<record[i].name<<"at ID =>"<<record[i].id<<endl;
+           break;
+         }
+          else
+          {
+           i++;
+          }
+        }//while ends
+        if(i==10)
+        {
+         cout<<"The ID inserted doesent belong to Record"<<endl;
+        }
+      }//else ends
+        
+    }
+
   };
 
 int main() {
     
     hashtable ht;
+    int x;
     
+    cout<<"Enter Action to perform"<<endl<<"Enter 1 to Insert Data"<<endl<<"Enter 2 to display data " <<endl<<"Enter 3 to search Particualr employee details"<<endl;
+    cin>>x;
+   
+    while(1){
+        
+    switch(x){
+        case 1 : ht.insertRecord("b",781); 
+                 ht.insertRecord("eqw",785);
+                 ht.insertRecord("nb",786);
+                 ht.insertRecord("nmc",784);
+                 ht.insertRecord("afh",738);
+                 ht.insertRecord("afv",786);
+                 ht.insertRecord("rf",787);
+                 ht.insertRecord("vsch",567);
+                 ht.insertRecord("cvs",157);
+                 ht.insertRecord("afd",463);
+                 cout<<"Data inserted Success";
+                 break;
+       case 2:   ht.display();  
+                 break;
+       case 3:  ht.search();
+                 break;
+        
+        default: cout<<"Enter Valid input";
+          }// switch case ends
 
-    ht.insertRecord("b",781);
-    ht.insertRecord("eqw",785);
-    ht.insertRecord("nb",786);
-    ht.insertRecord("nmc",784);
-    ht.insertRecord("afh",738);
-    ht.insertRecord("afv",786);
-    ht.insertRecord("rf",787);
-    ht.insertRecord("vsch",567);
-    ht.insertRecord("cvs",157);
-    ht.insertRecord("afd",463);
-    
-    ht.display();
+   }// loops ends
     return 0;
 }
