@@ -32,6 +32,7 @@ class doublyLinkedList{
     
     void insertNode(int data);
     void displayList();
+    void insertFront(int data);
 };
 
 void doublyLinkedList::insertNode(int data){
@@ -59,9 +60,21 @@ void doublyLinkedList:: displayList(){
     }
 }
 
+void doublyLinkedList:: insertFront(int data){
+    node * newNode = new node(data);
+    
+    newNode->prev = NULL;
+    newNode->next = head ;
+    head->prev = newNode;
+    head = newNode;
+    
+}
+    
 int main(){
     doublyLinkedList l;
     l.insertNode(5);
     l.insertNode(7);
+    l.displayList();
+    l.insertFront(45);
     l.displayList();
 }
