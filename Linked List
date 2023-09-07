@@ -27,12 +27,14 @@ class linkedList{
         head=NULL;
         tail=NULL;
     }
-    void insertNode(int DATA);
+    void insertNodeAtEnd(int DATA);
     void displayList();
     void updateData(int ,int);
+    void insertAtStart(int DATA);
+    
 };
 
-void linkedList::insertNode(int DATA){
+void linkedList::insertNodeAtEnd(int DATA){
     node* newNode = new node(DATA); 
     if(head==NULL){
         head=newNode;
@@ -72,15 +74,22 @@ void linkedList::updateData(int dataToBeReplaced ,
         }
     
 }
+
+void linkedList::insertAtStart(int DATA){
+    node * newNode = new node(DATA);
+    newNode->next=head;
+    head = newNode;
+}
 int main() {
 
     linkedList l;
-    l.insertNode(5);
-    l.insertNode(7);
-    l.insertNode(1);
-    l.insertNode(3);
+    l.insertNodeAtEnd(5);
+    l.insertNodeAtEnd(7);
+    l.insertNodeAtEnd(4);
+    l.insertNodeAtEnd(2);
+    l.insertAtStart(10);
     l.displayList();
-    l.updateData(10,5);
+   // l.updateData(9,10);
     l.displayList();
 
     return 0;
