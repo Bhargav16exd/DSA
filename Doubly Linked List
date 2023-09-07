@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+class node{
+    public:
+    int data;
+    node *prev;
+    node *next;
+    public:
+    node(){
+        data=0;
+        prev=NULL;
+        next=NULL;
+    }
+    node(int x){
+        data=x;
+        prev=NULL;
+        next=NULL;
+    }
+    
+};
+
+class doublyLinkedList{
+    public:
+    node * head;
+    node * tail;
+    public:
+    doublyLinkedList(){
+        head = NULL;
+        tail = NULL;
+    }
+    
+    void insertNode(int data);
+    void displayList();
+};
+
+void doublyLinkedList::insertNode(int data){
+    node* newNode = new node(data);
+    
+    if(head==NULL){
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    
+    head->prev = NULL;
+    head->next = newNode;
+    tail = newNode;
+    tail->prev = head;
+    tail->next = NULL;
+    
+}
+
+void doublyLinkedList:: displayList(){
+    node * temp = tail;
+    while( temp != NULL){
+        cout<<temp->data<<endl;
+        temp = temp->prev;
+    }
+}
+
+int main(){
+    doublyLinkedList l;
+    l.insertNode(5);
+    l.insertNode(7);
+    l.displayList();
+}
