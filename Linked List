@@ -1,64 +1,87 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
 using namespace std;
 
-class node{
+class node {
     public:
     int data;
     node* next;
-    
     public:
     node(){
         data=0;
         next=NULL;
     }
-    node(int x){
-        this->data = x;
-        this->next = NULL;
+    node(int reqInfo){
+        data = reqInfo;
+        next= NULL;
     }
 };
+
 
 class linkedList{
     public:
     node* head;
     node* tail;
-    linkedList(){
-        head = NULL;
-        tail = NULL;
-    }
-    
     public:
-    void insertNode(int data);
+    linkedList(){
+        head=NULL;
+        tail=NULL;
+    }
+    void insertNode(int DATA);
     void displayList();
+    void updateData(int ,int);
 };
 
-void linkedList::insertNode(int data){
-    node* newNode = new node(data);
-    
+void linkedList::insertNode(int DATA){
+    node* newNode = new node(DATA); 
     if(head==NULL){
-        head = newNode;
-        tail = newNode;
+        head=newNode;
+        tail=newNode;
         return;
     }
-    
-    tail->next=newNode;
-    tail = newNode;
+    tail->next = newNode;
+    tail=newNode;
 }
 
 void linkedList::displayList(){
     node* temp = head;
     while(temp!=NULL){
-        cout<<temp->data<<endl;
+        cout<<temp->data<<"->"<<endl;
         temp=temp->next;
     }
 }
 
+void linkedList::updateData(int dataToBeReplaced ,
+                            int dataWhichReplaced){
+        node* temp = head;
+        int flag;
+        while(temp!=NULL)
+        {
+         if(temp->data == dataWhichReplaced)
+         {  
+          temp->data = dataToBeReplaced;
+          flag = 0;
+          cout<<"data replacement success"<<endl;    
+          break;
+         }else{flag=1;}
+         temp=temp->next;
+        }
+        if(flag==1){
+            cout<<"The number which you want to display doesnt exists"<<endl;
+            
+        }
+    
+}
 int main() {
-   
-   linkedList l;
-   l.insertNode(5);
- // l.insertNode(6);
-   l.insertNode(7);
-   l.displayList();
-   
+
+    linkedList l;
+    l.insertNode(5);
+    l.insertNode(7);
+    l.insertNode(1);
+    l.insertNode(3);
+    l.displayList();
+    l.updateData(10,5);
+    l.displayList();
+
     return 0;
 }
