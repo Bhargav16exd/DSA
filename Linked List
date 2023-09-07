@@ -1,4 +1,4 @@
-/ Online C++ compiler to run C++ program online
+// Online C++ compiler to run C++ program online
 #include <iostream>
 using namespace std;
 
@@ -105,6 +105,7 @@ void linkedList::insertAfter(int whom,int with){
 }
 void linkedList::deleteNode(int data){
     node* temp = head;
+    node* prev =NULL ;
     node* trash;
 
         int flag;
@@ -113,18 +114,28 @@ void linkedList::deleteNode(int data){
          if(temp->data == data)
          {  
              if(temp==head){
-                 trash = head;
-                 trash=NULL;
-                 head=temp;
+                 head = NULL;
+                 head = temp->next;
+             }
+             else if( temp->next == NULL){
+                 tail = prev;
+                 tail->next = NULL;
+                 temp = NULL;
+                 cout<<"flag"<<endl;
+             }
+             else{
+                prev->next = temp->next;
+                temp = NULL;
              }
              
              flag=0;
              break;
          }else{flag=1;}
+         prev = temp;
          temp=temp->next;
         }
         if(flag==1){
-            cout<<"The number which you want to replace after doesnt exists"<<endl;
+            cout<<"The number which you want to delete doesnt exists"<<endl;
         }
 }
 int main() {
@@ -134,11 +145,11 @@ int main() {
     l.insertNodeAtEnd(7);
     l.insertNodeAtEnd(4);
     l.insertNodeAtEnd(2);
-    l.insertAtStart(10);
+   // l.insertAtStart(10);
     l.displayList();
-    l.insertAfter(4,17);
+ //   l.insertAfter(4,17);
     
-    l.deleteNode(5);
+    l.deleteNode(1);
    // l.updateData(9,10);
     l.displayList();
 
