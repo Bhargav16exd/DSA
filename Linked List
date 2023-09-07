@@ -31,6 +31,7 @@ class linkedList{
     void displayList();
     void updateData(int ,int);
     void insertAtStart(int DATA);
+    void insertAfter(int whom , int with);
     
 };
 
@@ -70,7 +71,6 @@ void linkedList::updateData(int dataToBeReplaced ,
         }
         if(flag==1){
             cout<<"The number which you want to display doesnt exists"<<endl;
-            
         }
     
 }
@@ -79,6 +79,28 @@ void linkedList::insertAtStart(int DATA){
     node * newNode = new node(DATA);
     newNode->next=head;
     head = newNode;
+}
+
+void linkedList::insertAfter(int whom,int with){
+    node* temp = head;
+
+        int flag;
+        while(temp!=NULL)
+        {
+         if(temp->data == whom)
+         {  
+             node* newNode = new node(with);          
+             newNode->next=temp->next;
+             temp->next = newNode;
+             cout<<"Updation Success"<<endl;
+             flag=0;
+             break;
+         }else{flag=1;}
+         temp=temp->next;
+        }
+        if(flag==1){
+            cout<<"The number which you want to replace after doesnt exists"<<endl;
+        }
 }
 int main() {
 
@@ -89,6 +111,7 @@ int main() {
     l.insertNodeAtEnd(2);
     l.insertAtStart(10);
     l.displayList();
+    l.insertAfter(4,17);
    // l.updateData(9,10);
     l.displayList();
 
