@@ -22,8 +22,8 @@ class node{
 
 class doublyLinkedList{
     public:
-    node * head;
-    node * tail;
+    node *head;
+    node *tail;
     public:
     doublyLinkedList(){
         head = NULL;
@@ -34,6 +34,10 @@ class doublyLinkedList{
     void displayList();
     void insertFront(int data);
     void insertBack(int data);
+    void insertBetween(int after,int data);
+    void deleteStart();
+    void deleteEnd();
+    void deleteNode(int data);
 };
 
 void doublyLinkedList::insertNode(int data){
@@ -79,7 +83,70 @@ void doublyLinkedList:: insertBack(int data){
     tail->next = newNode;
     tail = newNode;
 }
+
+void doublyLinkedList::insertBetween(int after , int data){
+
+    node * temp = head;
+
+    while(temp!=NULL){
+
+        node * nextNode = temp->next;
+        
+        if(temp->data==after){
+
+         node * newNode = new node(data);
+
+         newNode->prev = temp;
+         newNode->next = temp->next;
+         temp->next = newNode;
+         nextNode->prev = newNode;
+
+         cout<<"Data Insert Success"<<endl;
+
+        }
+        temp = temp->next;
+    }
+}
+
+void doublyLinkedList::deleteStart(){
+    node * temp = head ;
+    head = temp->next;
+    head->prev = NULL;
+    temp=NULL;
+    cout<<"Head delete Success"<<endl;
+}
     
+void doublyLinkedList::deleteEnd(){
+    node * temp = tail;
+    tail = temp->prev;
+    tail->next = NULL;
+    temp = NULL;
+    cout<<"Tail Deletion Success"<<endl;
+}
+
+void doublyLinkedList::deleteNode(int data){
+ 
+ node * temp = head;
+
+
+ while(temp!=NULL){
+
+     node * prevNode = temp->prev;
+     node * nextNode = temp->next;
+
+    if(temp->data == data){
+     
+     prevNode->next = nextNode;
+     nextNode->prev = prevNode;
+     temp == NULL;
+
+    }
+
+    temp = temp->next;
+ }
+
+}
+
 int main(){
     doublyLinkedList l;
     l.insertNode(5);
@@ -87,5 +154,9 @@ int main(){
     l.displayList();
     l.insertFront(45);
     l.insertBack(10);
+    l.insertBetween(7,69);
+   // l.deleteStart();
+   // l.deleteEnd();
+    l.deleteNode(69);
     l.displayList();
 }
