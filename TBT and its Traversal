@@ -1,0 +1,111 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+    public:
+    int data;
+    Node * left;
+    Node * right;
+    bool isLeftThreaded;
+    bool isRightThreaded;
+    public:
+    Node(){
+        left = nullptr;
+        right= nullptr;
+        isLeftThreaded = false;
+        isRightThreaded = false;
+    }
+    Node(int value){
+        data = value;
+        left = nullptr;
+        right= nullptr;
+        isLeftThreaded = false;
+        isRightThreaded = false;
+    }
+    
+};
+
+class tree{
+    public:
+    Node * root = nullptr;
+    public:
+    void insert(int value){
+        root = insertHelper(root,value);
+    }
+    Node * insertHelper(Node * node , int value){
+        if(!node){
+            return new Node(value);
+        }
+        else if(node->data > value){
+            node->left = insertHelper(node->left,value);
+        }
+        else{
+            node->right = insertHelper(node->right,value);
+        }
+        return node;
+    }
+    // Binary tree creation 
+    
+    void createThreadedBinaryTree(){
+        Node *predecessor = nullptr;
+        helper(root,predecessor);
+    }
+    
+    void helper(Node* node , Node*& predecessor){
+        
+        if(node){
+        helper(node->left , predecessor);
+        if(!node->left){
+            node->left = predecessor;
+            node->isLeftThreaded = true;
+        }
+        if(predecessor && !predecessor->right){
+            predecessor->right = node;
+            predecessor->isRightThreaded = true;
+        }
+        predecessor = node ;
+        
+        helper(node->right, predecessor);
+        }
+    }
+    
+    
+    // inorder traversal
+    
+    void inOrder(){
+        
+            Node * current = leftmost(root);
+            while(current){
+            cout<<current->data<<endl;
+            if(current->isRightThreaded){
+                current = current->right;
+            }
+            else{
+                current = leftmost(current->right);
+            }
+            }
+        
+    }
+    
+    Node *leftmost(Node * node){
+        
+        while(node && !node->isLeftThreaded){
+            node = node->left;
+        }
+        return node;
+    }
+};
+int main(){
+    tree t;
+    t.insert(4);
+    t.insert(2);
+    t.insert(1);
+    t.insert(3);
+    t.insert(6);
+    t.insert(5);
+    t.insert(7);
+    
+    t.createThreadedBinaryTree();
+    t.inOrder();
+    return 0;
+}
