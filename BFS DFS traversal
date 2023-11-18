@@ -1,6 +1,7 @@
 // Online C++ compiler to run C++ program online
 #include <iostream>
 #include<queue>
+#include<stack>
 using namespace std;
 
 const int maxx= 7;
@@ -43,6 +44,27 @@ class Graph{
             }
         }
     }
+    void dfsTraversal(int node){
+        int visited[maxx] = {false};
+        stack<int> s;
+        
+        visited[node]= true;
+        s.push(node);
+        cout<<"DFS traversal:"<<endl;
+        while(!s.empty()){
+            
+            int j = s.top();
+            s.pop();
+            cout<<j<<endl;
+            for(int k=0;k<maxx;k++){
+                if(adjMatrix[j][k] && !visited[k]){
+                    visited[k]= true;
+                    s.push(k);
+                }
+            }
+        }
+        
+    }
     
 };
 
@@ -60,5 +82,6 @@ int main() {
     g.addEdge(4,6);
 
     g.bfsTraversal(1);
+    g.dfsTraversal(0);
     return 0;
 }
