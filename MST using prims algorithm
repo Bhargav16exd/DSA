@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+
+const int m = 5;
+
+class Graph
+{
+    public:
+    int vertices;
+    int adjMat[m][m];
+    public:
+    Graph(int value){
+        vertices = value;
+        for(int i=0 ; i<m ;i++){
+            for(int j=0 ; j<m ; j++){
+                adjMat[i][j]=0;
+            }
+        }
+    }
+    void addEdge(int u,int v,int weight){
+        adjMat[u][v]=weight;
+        adjMat[v][u]=weight;
+    }
+    
+    void getMST()
+    {
+        bool isVisited[m];
+        int parent[m];
+        int weight[m];
+        
+        for(int i=0 ;i<m;i++){
+            weight[i]= 999;
+            isVisited[i] = false;
+        }
+        
+        weight[0]=0;
+        parent[0]=-1;
+        
+        for(int count=0;count<m-1;count++)
+        {
+        
+         int u = findMinWeight(weight , isVisited);
+        
+         isVisited[u]=true;
+        
+         for(int v=0 ; v<m; v++){
+        
+      if(adjMat[u][v] && !isVisited[v] && adjMat[u][v] < weight[v])
+          {
+              parent[v]=u;
+              weight[v]=adjMat[u][v];
+          }
+         }
+        }
+        printMST(parent); 
+    }
+    
+    int findMinWeight(int weight[] , bool isVisited[]){
+        int min = 999;
+        int minIndex=-1 ;
+        
+        for(int i=0;i<m;i++){
+            if(!isVisited[i] && weight[i] < min){
+                min = weight[i];
+                minIndex = i;
+            }
+        }
+        return minIndex ;
+    }
+   
+    void printMST(int parent[]) {
+        cout << "Edges in the Minimum Spanning Tree:\n";
+        for (int i = 1; i < vertices; ++i)
+            cout << "Edge: " << parent[i] << " - " << i << "   Weight: " << adjMat[i][parent[i]] << endl;
+    }
+
+};
+
+int main(){
+    
+    Graph graph(5);
+     graph.addEdge(0, 1, 2);
+    graph.addEdge(0, 3, 1);
+    graph.addEdge(1, 2, 4);
+    graph.addEdge(1, 3, 3);
+    graph.addEdge(1, 4, 5);
+    graph.addEdge(2, 4, 6);
+    graph.addEdge(3, 4, 7);
+    graph.getMST();
+}
