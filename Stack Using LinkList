@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node*next = NULL;
+    public:
+    Node(int value){
+        data = value ;
+        next = NULL;
+    }
+};
+
+class Stack{
+    public:
+    Node* top;
+    public:
+    void push(int data){
+        if(top == NULL){
+            top = new Node(data);
+            cout << data<<"pushed to the stack.\n";
+            return;
+        }
+        
+        Node *node = new Node(data);
+        node->next = top;
+        top = node;
+        cout << data<<"pushed to the stack.\n";
+    }
+    
+    void pop(){
+        if(isEmpty()){
+            cout<<"Stack Underflow"<<endl;
+            return;
+        }
+        Node * temp = top;
+        top = temp->next;
+        cout << temp->data << " popped from the stack.\n";
+        delete temp;
+    }
+    
+    int isEmpty(){
+        if(top == NULL){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    void display(){
+        Node * temp = top;
+        if(isEmpty()){
+            cout<<"Stack Underflow"<<endl;
+            return;
+        }
+        while(temp!=NULL){
+            cout<<temp->data<<endl;
+            temp = temp->next;
+        }
+    }
+    int topp(){
+       if(isEmpty()){
+            cout<<"Stack Underflow"<<endl;
+            return -1 ;
+        }  
+        else{
+            return top->data;
+        }
+    }
+    
+};
+
+int main() {
+    
+    Stack stack;
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
+    
+    stack.display();
+    cout<<" "<<endl;
+    stack.pop();
+    cout<<" "<<endl;
+    stack.display();
+    cout<<stack.topp()<<" "<<"top element"<<endl;
+    
+
+    return 0;
+
+}
